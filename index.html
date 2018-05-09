@@ -5,6 +5,7 @@
   <body>
     <webview/>
     <script>
+      nw.Window.get().showDevTools()
       addEventListener('DOMContentLoaded', event => {
         const wv = document.querySelector('webview')
         wv.addEventListener('loadcommit', (event) => {
@@ -49,7 +50,7 @@
               break;
           }
         })
-        webivew.src = 'https://miaulightouch.github.io/nw-popup-issue'
+        wv.src = 'https://miaulightouch.github.io/nw-popup-issue'
       })
     </script>
   </body>
