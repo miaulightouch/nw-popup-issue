@@ -16,10 +16,7 @@
       }
       addEventListener('message', event => {
         if (event.origin.indexOf(location.origin) === -1) {
-          console.log({
-            data: event.data,
-            origin: event.origin
-          })
+          console.log(event.data)
         }
       })
       </script>
