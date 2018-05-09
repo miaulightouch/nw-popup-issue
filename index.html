@@ -13,10 +13,14 @@
           500
         )
       }
-      addEventListener('message', event => console.log({
-        data: event.data,
-        origin: event.origin
-      }))
+      addEventListener('message', event => {
+        if (evnet.origin.indexOf(location.origin) === -1) {
+          console.log({
+            data: event.data,
+            origin: event.origin
+          })
+        }
+      })
       </script>
     </body>
 </html>
