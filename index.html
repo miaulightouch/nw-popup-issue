@@ -1,13 +1,6 @@
 <html>
   <head>
     <title>NWJS webview popup issue</title>
-    <script>
-      const { Window } = require('nw.gui')
-      const childWindow = window.open('https://miaulightouch.github.io/nw-popup-issue')
-      Window.get(childWindow).showDevTools()
-      childWindow.postMessage('[MAIN -> Page] hello from parent window.')
-      addEventListener('message', event => console.log(event.data))
-    </script>
   </head>
   <body>
     <webview/>
@@ -17,7 +10,6 @@
         wv.addEventListener('loadcommit', (event) => {
           if (event.isTopLevel) {
             wv.showDevTools(true)
-            wv.contentWindow.postMessage('[WV -> Page] hello from parent webview')
           }
         })
         /**
