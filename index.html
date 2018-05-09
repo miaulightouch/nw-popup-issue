@@ -7,11 +7,9 @@
     <button onclick="openWindow()">Click here to open new window</button>
     <script>
       function openWindow () {
-        const childUrl = 'https://lightouchd.droppages.com/popup-issue.html'
-        const childWindow = window.open(childUrl)
-        console.log(childUrl, childWindow)
+        const childWindow = window.open('https://lightouchd.droppages.com/popup-issue.html')
         setTimeout(() =>
-          childWindow.postMessage('[Page -> Child Window] Hello from main page.', childUrl),
+          childWindow.postMessage('[Page -> Child Window] Hello from main page.', 'https://lightouchd.droppages.com'),
           500
         )
       }
