@@ -1,0 +1,9 @@
+{
+  "name": "nw-popup-issue",
+  "version": "1.0.0",
+  "main": "index.html",
+  "license": "MIT",
+  "dependencies": {
+    "nw": "^0.30.2"
+  }
+}

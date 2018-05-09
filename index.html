@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>NWJS webview popup issue</title>
+    <script>
+      const { Window } = require('nw.gui')
+      const childWindow = window.open('')
+      Window.get(childWindow).showDevTools()
+      childWindow.postMessage('[MAIN -> Page] hello from parent window.')
+      addEventListener('message', event => console.log(event.data))
+    </script>
+  </head>
+  <body>
+    <webview/>
+    <script>
+      addEventListener('DOMContentLoaded', event => {
+        const wv = document.querySelector('webview')
+        wv.addEventListener('loadcommit', (event) => {
+          if (event.isTopLevel) {
+            wv.showDevTools(true)
+            wv.contentWindow.postMessage('[WV -> Page] hello from parent webview')
+          }
+        })
+        /**
+         *  not a solution, but from https://github.com/nwjs/nw.js/issues/5843, 
+         *  it just take the url and open window in main process, and the window.opener is not at same origin.
+         *
+         *  to compare result, open https://miaulightouch.github.io/nw-popup-issue in browser with DevTools open.
+         */
+        let newWindow
+        wv.addEventListener('newwindow', event => {
+          switch (event.windowOpenDisposition) {
+            case 'ignore':
+              // Not sure what this is used by.  Default enum value, maybe.
+              console.debug('Ignoring new window request');
+              return;
+
+            case 'save_to_disk':
+              // Ctrl + S, maybe?  Not sure how to reproduce that.
+              console.log('save_to_disk is not implemented');
+              return;
+
+            case 'current_tab':
+              return;
+
+            case 'new_background_tab':
+            case 'new_foreground_tab':
+              newWindow = open(event.targetUrl, '_blank');
+              if (event.windowOpenDisposition != 'new_background_tab') {
+                newWindow.focus();
+              }
+              break;
+
+            case 'new_window':
+            case 'new_popup':
+              newWindow = open(event.targetUrl, '_blank');
+              newWindow.focus();
+              break;
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
