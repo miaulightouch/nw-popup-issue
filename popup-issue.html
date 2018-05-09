@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>child site</title>
+    <script>
+      const parentUrl = 'https://miaulightouch.github.io/nw-popup-issue'
+      addEventListener('message', event => {
+        if (event.origin.indexOf(parentUrl) !== -1) {
+          window.opener.postMessage({
+            recv: event.data,
+            msg: '[Child Window -> Page] Data received.'
+          }, event.origin)
+        }
+      })
+    </script>
+  </head>
+  <body>
+    <h1>open your DevTools (child window)</h1>
+  </body>
+</html>
