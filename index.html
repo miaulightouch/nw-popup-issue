@@ -3,7 +3,7 @@
     <title>NWJS webview popup issue</title>
     <script>
       const { Window } = require('nw.gui')
-      const childWindow = window.open('')
+      const childWindow = window.open('https://miaulightouch.github.io/nw-popup-issue')
       Window.get(childWindow).showDevTools()
       childWindow.postMessage('[MAIN -> Page] hello from parent window.')
       addEventListener('message', event => console.log(event.data))
@@ -57,6 +57,7 @@
               break;
           }
         })
+        webivew.src = 'https://miaulightouch.github.io/nw-popup-issue'
       })
     </script>
   </body>
