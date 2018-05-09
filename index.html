@@ -8,10 +8,11 @@
     <script>
       function openWindow () {
         const childWindow = window.open('https://lightouchd.droppages.com/popup-issue.html')
-        setTimeout(() =>
-          childWindow.postMessage('[Page -> Child Window] Hello from main page.', 'https://lightouchd.droppages.com'),
-          500
-        )
+        const msg = '[Page -> Child Window] Hello from main page, waiting for response...'
+        setTimeout(() => {
+          console.log(msg)
+          childWindow.postMessage(msg, 'https://lightouchd.droppages.com')
+        }, 500)
       }
       addEventListener('message', event => {
         if (event.origin.indexOf(location.origin) === -1) {

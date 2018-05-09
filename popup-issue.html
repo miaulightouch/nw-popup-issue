@@ -4,8 +4,8 @@
     <script>
       addEventListener('message', event => {
         window.opener.postMessage({
-          recv: event.data,
-          msg: '[Child Window -> Page] Data received.'
+          received: event.data,
+          response: '[Child Window -> Page] Data received.'
         }, event.origin)
       })
     </script>
